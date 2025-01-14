@@ -13,16 +13,21 @@ function DeliveryLocationCard() {
     const [addresses, setAddresses] = useState()
     const userData = useSelector(selectUserData);
     useEffect(() => {
-        const data = {
-            "user_id": userData.data.id,
-            "token": userData.data.auth_token,
-            "restaurant_id": null
+        const getAddresses = () => {
+            const data = {
+                "user_id": userData.data.id,
+                "token": userData.data.auth_token,
+                "restaurant_id": null
+            }
+            axios.post('https://lewoffy.infineur.com/public/api/get-addresses', data)
+                .then((res) => {
+                    console.log("Get Address : ", res.data);
+                    setAddresses(res.data)
+                })
         }
-        axios.post('https://lewoffy.infineur.com/public/api/get-addresses', data)
-            .then((res) => {
-                console.log("Get Address : ", res.data);
-                setAddresses(res.data)
-            })
+        if (userData?.data?.id) {
+            getAddresses()
+        }
     }, [])
 
     const handleChangeLocation = () => {

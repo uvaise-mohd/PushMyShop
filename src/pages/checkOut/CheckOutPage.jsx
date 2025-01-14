@@ -169,7 +169,7 @@ function CheckOutPage() {
                         ))}
                     </div>
                     <button
-                        className="btn bg-main-color w-full mt-5"
+                        className="btn bg-main-color text-white w-full mt-5"
                         onClick={handlePlaceOrder}
                     >
                         Pay with{' '}

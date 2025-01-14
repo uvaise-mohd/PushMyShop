@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MapComponent from './components/MapComponent';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,12 @@ function AddLocationPage() {
     const userData = useSelector(selectUserData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!userData | userData == null) {
+            navigate("/auth")
+        }
+    }, [])
 
     const handleSubmit = async () => {
         if (!position.lat || !position.lng) {
